@@ -42,6 +42,33 @@ def pattern_search(sekvence, vzor = ""):
     return pozice
 
 
+def binary_search(numbers, target):
+   """ zacatek, konec = 0, len(seznam) - 1
+    stred = (zacatek + konec) // 2
+    print(stred)
+    if seznam[stred] == cislo:
+        return stred
+    elif seznam[stred] > cislo:
+        novy_seznam = seznam[0:stred + 1]
+        binary_search(novy_seznam, cislo)
+    elif seznam[stred] < cislo:
+        novy_seznam = seznam[stred:-1]
+        binary_search(novy_seznam, cislo)
+    else:
+        return None"""
+
+   left, right = 0, len(numbers) - 1
+   while left <= right:
+       mid = (left + right) // 2
+       if numbers[mid] == target:
+           return mid
+       elif numbers[mid] <target:
+           left = mid + 1
+       else:
+           right = mid - 1
+   return None
+
+
 def main():
     """sequential_data = read_data("sequential.json", "unordered_numbers")
     print("Sequential data: ", sequential_data)
@@ -51,6 +78,9 @@ def main():
     print(sekvence)
     pozice = pattern_search(sekvence, "ATG")
     print(pozice)
+    sekvence_1 = read_data("sequential.json", "ordered_numbers")
+    pozice_cisla = binary_search(sekvence_1, 21)
+    print(pozice_cisla)
     return
 
 
