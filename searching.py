@@ -13,21 +13,31 @@ def read_data(file_name, field):
     :return: (list, string),
     """
     file_path = os.path.join(cwd_path, file_name)
-    with open(f"sequential.json") as data_file:
-        allowed_keys = json.load(data_file)["allowed_keys"]
+    with open(file_path) as data_file:
+        data = json.load(data_file)
+    for key in data.keys():
+        if field == key:
+            sequential_data = data[field]
+            return sequential_data
+        else:
+            return None
 
-    if field not in allowed_keys:
-        return None
 
-    with open(file_name) as file:
-        data = json.load(file)
-
-    return data.get(field, None)
+def linear_search(sekvence, cislo):
+    pozice = []
+    slovnik = {"position": pozice, "count": 0}
+    for i in range(len(sekvence)):
+        if sekvence[i] == cislo:
+            pozice.append(i)
+            slovnik["count"] = slovnik["count"] + 1
+    return slovnik
 
 
 def main():
     sequential_data = read_data("sequential.json", "unordered_numbers")
     print("Sequential data: ", sequential_data)
+    slovnik = linear_search(sequential_data, 0)
+    print(slovnik)
     return
 
 
